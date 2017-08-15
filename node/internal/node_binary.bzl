@@ -5,6 +5,8 @@ BASH_TEMPLATE = """
 #!/usr/bin/env bash
 set -e
 
+cd "$(dirname "$0")"
+
 # Resolve to 'this' node instance if other scripts
 # have '/usr/bin/env node' shebangs
 export PATH={node_bin_path}:$PATH
