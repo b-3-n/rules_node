@@ -105,7 +105,7 @@ def node_library_impl(ctx):
     install_cmd.append(staging_dir)
     cmds.append(" ".join(install_cmd))
 
-    print("cmds: \n%s" % "\n".join(cmds))
+    # print("cmds: \n%s" % "\n".join(cmds))
 
     ctx.action(
         mnemonic = "NpmInstallLocal",
