@@ -4,7 +4,7 @@ _modules_filetype = FileType(["node_modules"])
 def _get_node_modules_dir(file, include_node_modules = True):
     filename = str(file)
     parts = filename.split("]")
-    prefix = parts[0][len("Artifact:[["):]
+    prefix = parts[0][len("File:[["):]
     middle = parts[1]
     suffix = parts[2].split("/")
     components = [prefix, middle] + suffix[0:-1]
@@ -105,7 +105,7 @@ def node_library_impl(ctx):
     install_cmd.append(staging_dir)
     cmds.append(" ".join(install_cmd))
 
-    #print("cmds: \n%s" % "\n".join(cmds))
+    print("cmds: \n%s" % "\n".join(cmds))
 
     ctx.action(
         mnemonic = "NpmInstallLocal",
