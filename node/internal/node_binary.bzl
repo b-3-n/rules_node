@@ -1,8 +1,7 @@
 _js_filetype = FileType([".js"])
 _modules_filetype = FileType(["node_modules"])
 
-BASH_TEMPLATE = """
-#!/usr/bin/env bash
+BASH_TEMPLATE = """#!/usr/bin/env bash
 set -e
 
 cd "$(dirname "$0")"
