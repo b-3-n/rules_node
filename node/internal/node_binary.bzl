@@ -44,11 +44,13 @@ def node_binary_impl(ctx):
     script = ctx.file.main
     node = ctx.file._node
     node_paths = []
+    node_modules_files = []
 
     for file in ctx.files.modules:
+        node_modules_files += [file]
         if not file.basename.endswith("node_modules"):
             fail("npm_dependency should be a path to a node_modules/ directory.")
-        node_paths += [_get_node_modules_dir_from_sourcefile(file)]
+        node_paths += ['$(pwd)/' + ctx.attr.name + '.runfiles' + file.short_path[2:]]
 
     for dep in ctx.attr.deps:
         lib = dep.node_library
@@ -71,10 +73,7 @@ def node_binary_impl(ctx):
             node_paths = ":".join(node_paths),
         ),
     )
-
-    #print("node_paths %s" % "\n".join(node_paths))
-
-    runfiles = [node, script] + inputs + srcs
+    runfiles = [node, script] + inputs + srcs + node_modules_files
 
     return struct(
         runfiles = ctx.runfiles(
