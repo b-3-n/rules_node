@@ -61,7 +61,7 @@ def node_binary_impl(ctx):
             inputs.append(file)
             node_paths += [file.path]
 
-    node_paths = list(set(node_paths))
+    node_paths = list(depset(node_paths))
 
     ctx.file_action(
         output = ctx.outputs.executable,
